@@ -1,0 +1,19 @@
+{
+  "name": "nftchain-server",
+  "version": "1.0.0",
+  "description": "NFTChain server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NFTChain/NFTChain-server.git"
+  },
+  "author": "Benjamin Grabow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NFTChain/NFTChain-server/issues"
+  },
+  "homepage": "https://github.com/NFTChain/NFTChain-server#readme"
+}
