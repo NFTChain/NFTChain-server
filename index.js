@@ -17,8 +17,10 @@ server.get("/", (req, res) => {
 });
 
 const userRouter = require("./src/users/user-router");
+const nftRouter = require("./src/users/nft-router");
 
 server.use("/user", userRouter);
+server.use("/nft", nftRouter);
 
 const port = process.env.PORT || 5000;
 
