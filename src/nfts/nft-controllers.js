@@ -3,7 +3,7 @@ require("dotenv");
 const Users = require("./nft-model");
 
 exports.getNfts = async (req, res) => {
-  const users = await Users.getAllUsers();
+  const users = await Users.getAllNfts();
   if (users) {
     res.status(200).json(users);
   } else {
