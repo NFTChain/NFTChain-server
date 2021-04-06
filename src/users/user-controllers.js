@@ -1,17 +1,17 @@
-require("dotenv");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+require('dotenv');
+const bcrypt = require('bcryptjs');
+// const jwt = require("jsonwebtoken");
 
-const Users = require("./user-model");
+const Users = require('./user-model');
 
-const generateToken = require("../utils/generate-token");
+const generateToken = require('../utils/generate-token');
 
 exports.getUsers = async (req, res) => {
   const users = await Users.getAllUsers();
   if (users) {
     res.status(200).json(users);
   } else {
-    res.status(500).json("Users not found");
+    res.status(500).json('Users not found');
   }
 };
 
@@ -20,7 +20,7 @@ exports.getUserByID = async (req, res) => {
   if (user) {
     res.status(200).json(user);
   } else {
-    res.status(500).json("User not found");
+    res.status(500).json('User not found');
   }
 };
 
@@ -51,7 +51,7 @@ exports.register = async (req, res) => {
         res
           .status(401)
           .json(
-            "Account registered, but error retrieving coach or student details"
+            'Account registered, but error retrieving coach or student details'
           );
       }
     }
@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
         },
       });
     } else {
-      res.status(401).json({ message: "Email or password is incorrect" });
+      res.status(401).json({ message: 'Email or password is incorrect' });
     }
   } catch (error) {
     res.status(500).json({ message: `Unable to login ${error.message}` });
@@ -91,11 +91,11 @@ exports.delete = async (req, res) => {
     const user = await Users.remove(req.params.id);
     if (user) {
       res.status(200).json({
-        message: "User deleted",
+        message: 'User deleted',
       });
     }
   } catch (error) {
-    res.status(500).json({ message: "Could not delete user" });
+    res.status(500).json({ message: 'Could not delete user' });
   }
 };
 
@@ -105,10 +105,10 @@ exports.put = async (req, res) => {
     if (updatedUser) {
       res.status(200).json({
         updatedUser,
-        message: "user updated successfully",
+        message: 'user updated successfully',
       });
     }
   } catch (error) {
-    res.status(500).json({ message: "Unable to update user" });
+    res.status(500).json({ message: 'Unable to update user' });
   }
 };
