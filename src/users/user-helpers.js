@@ -13,6 +13,19 @@ exports.validateRegister = (req, res, next) => {
   }
 };
 
+exports.validateUsername = async (req, res, next) => {
+  const username = req.body.username;
+  const user = await Users.findByUsername(username);
+
+  if (user) {
+    res.status(409).json({
+      message: 'Username already exists',
+    });
+  } else {
+    next();
+  }
+};
+
 exports.validatePassword = async (req, res, next) => {
   const user = await Users.findBy(req.body.email);
 
