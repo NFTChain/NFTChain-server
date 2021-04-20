@@ -45,13 +45,13 @@ exports.uploadNFT = async (req, res) => {
         message: 'upload successful',
         ipfs_hash: response.data.IpfsHash,
       });
-      await fs.unlinkSync(file.path);
+      await fs.unlinkSync(file.path); // delete currently saved uploaded file
     })
     .catch(async (error) => {
       res.status(500).json({
         message: 'Upload failed.',
         error,
       });
-      await fs.unlinkSync(file.path);
+      await fs.unlinkSync(file.path); // delete currently saved uploaded file
     });
 };
