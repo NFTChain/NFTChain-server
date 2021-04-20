@@ -37,9 +37,8 @@ exports.uploadNFT = async (req, res) => {
       maxBodyLength: 'Infinity', //this is needed to prevent axios from erroring out with large files
       headers: {
         'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-        pinata_api_key: '4eb04864b87b11627705',
-        pinata_secret_api_key:
-          '6312329d9eaa3d999a1f637ad27b3539dc2fe7f64153a6f872994b33e1c15042',
+        pinata_api_key: process.env.PINATA_KEY,
+        pinata_secret_api_key: process.env.PINATA_SECRET,
       },
     })
     .then(async (response) => {
