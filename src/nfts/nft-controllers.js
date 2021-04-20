@@ -10,7 +10,7 @@ exports.uploadNFT = async (req, res) => {
 
   let data = new FormData();
   data.append('file', fileStream);
-  data.append('pinataMetadata', metaData);
+  data.append('pinataMetadata', metaData); // metadata is saved in request because we need the tokenId from the frontend (frontend gets the id from the smart contract)
 
   //pinataOptions are optional
   const pinataOptions = JSON.stringify({
