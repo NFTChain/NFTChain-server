@@ -5,7 +5,6 @@ const FormData = require('form-data');
 
 exports.uploadNFT = async (req, res) => {
   const file = req.file;
-  console.log(file);
   const metaData = req.body.pinataMetadata;
   const fileStream = fs.createReadStream(file.path);
 
