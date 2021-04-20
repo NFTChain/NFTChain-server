@@ -1,10 +1,38 @@
 require('dotenv').config();
 const axios = require('axios');
+const fs = require('fs');
+const FormData = require('form-data');
 
 exports.uploadNFT = async (req, res) => {
-  const { data } = req.body;
+  const file = req.file;
+  console.log(file);
+  const metaData = req.body.pinataMetadata;
+  const fileStream = fs.createReadStream(file.path);
+
+  let data = new FormData();
+  data.append('file', fileStream);
+  data.append('pinataMetadata', metaData);
+
+  //pinataOptions are optional
+  const pinataOptions = JSON.stringify({
+    cidVersion: 0,
+    customPinPolicy: {
+      regions: [
+        {
+          id: 'FRA1',
+          desiredReplicationCount: 1,
+        },
+        {
+          id: 'NYC1',
+          desiredReplicationCount: 2,
+        },
+      ],
+    },
+  });
+  data.append('pinataOptions', pinataOptions);
+
   const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
-  return axios
+  axios
     .post(url, data, {
       maxBodyLength: 'Infinity', //this is needed to prevent axios from erroring out with large files
       headers: {
@@ -16,14 +44,16 @@ exports.uploadNFT = async (req, res) => {
     })
     .then(async (response) => {
       res.status(200).json({
-        message: 'Upload success.',
+        message: 'upload successful',
         ipfs_hash: response.data.IpfsHash,
       });
+      await fs.unlinkSync(file.path);
     })
-    .catch((error) => {
+    .catch(async (error) => {
       res.status(500).json({
         message: 'Upload failed.',
         error,
       });
+      await fs.unlinkSync(file.path);
     });
 };
