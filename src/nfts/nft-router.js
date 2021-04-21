@@ -1,9 +1,11 @@
-require("dotenv");
-const router = require("express").Router();
+require('dotenv');
+const multer = require('multer');
+const router = require('express').Router();
 
-const nftController = require("./nft-controllers");
+const nftController = require('./nft-controllers');
 
-router.get("/", nftController.getNfts);
-router.get("/:id", nftController.getNftByID);
+const upload = multer({ dest: 'uploads/' });
+
+router.post('/upload', upload.single('file'), nftController.uploadNFT);
 
 module.exports = router;
