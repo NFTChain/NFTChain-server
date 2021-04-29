@@ -19,7 +19,7 @@ exports.uploadNFT = async (req, res) => {
       regions: [
         {
           id: 'FRA1',
-          desiredReplicationCount: 1,
+          desiredReplicationCount: 2,
         },
         {
           id: 'NYC1',
